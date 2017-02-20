@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+
+</script>
+      
+   </head>
+   
+   <body>
+<div id="list">
+
+<pre id="objectdata"/></pre>
+
+<ul id="ullist">
+
+</ul>
+
+</div>
+   
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAqancQf91MhFQycm2Cmam3dV9VGaRIeTM",
+    authDomain: "test-72e9e.firebaseapp.com",
+    databaseURL: "https://test-72e9e.firebaseio.com",
+    storageBucket: "test-72e9e.appspot.com",
+    messagingSenderId: "810817400782"
+  };
+  firebase.initializeApp(config);
+
+var db = firebase.database();
+
+var pre = document.getElementById("objectdata");
+
+var ullist= document.getElementById("ullist");
+
+var ref = db.ref().child('irin');
+
+ref.on('value', function(data){
+
+console.log(data.val().name);
+
+pre.innerHTML = JSON.stringify(data.val());
+
+//data.forEach(function(dataa){
+
+//console.log(dataa.val().name +" "+ dataa.val().email);
+
+
+
+//});
+
+ref.on('child_added', function(data2){
+
+var li = document.createElement('li');
+
+li.innerHTML = data2.val().name;
+
+li.id = data2.key;
+
+ullist.appendChild(li);
+});
+
+});
+
+
+
+console.log(ref);
+</script>
+
+
+
+   </body>
+   
+</html>
